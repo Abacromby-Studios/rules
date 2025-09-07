@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCP Foundation Milsim - Rules & Regulations</title>
+    <style>
+        :root {
+            --primary-dark: #0a0a0a;
+            --primary-red: #990000;
+            --secondary-red: #cc0000;
+            --accent-gray: #333333;
+            --text-light: #f0f0f0;
+            --border-color: #444444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjMWExYTFhIj48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDVMNSAwWk02IDRMNCA2Wk0tMSAxTDEgLTFaIiBzdHJva2U9IiMzMzMzMzMiIHN0cm9rZS13aWR0aD0iMSI+PC9wYXRoPgo8L3N2Zz4=');
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid var(--primary-red);
+            margin-bottom: 30px;
+            background-color: rgba(10, 10, 10, 0.9);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(153, 0, 0, 0.1),
+                rgba(153, 0, 0, 0.1) 10px,
+                rgba(153, 0, 0, 0.05) 10px,
+                rgba(153, 0, 0, 0.05) 20px
+            );
+            z-index: -1;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: var(--primary-red);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--accent-gray));
+            border: 3px solid var(--primary-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-red);
+            box-shadow: 0 0 15px rgba(153, 0, 0, 0.5);
+        }
+        
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .tab-button {
+            padding: 12px 24px;
+            background-color: var(--accent-gray);
+            color: var(--text-light);
+            border: none;
+            border-radius: 5px 5px 0 0;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .tab-button:hover {
+            background-color: #444;
+        }
+        
+        .tab-button.active {
+            background-color: var(--primary-red);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            background-color: rgba(25, 25, 25, 0.9);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h2 {
+            color: var(--secondary-red);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 1.8rem;
+        }
+        
+        h3 {
+            color: var(--text-light);
+            margin: 25px 0 15px;
+            font-size: 1.3rem;
+        }
+        
+        .rules-list {
+            list-style-type: none;
+        }
+        
+        .rules-list li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .rules-list li::before {
+            content: "•";
+            color: var(--primary-red);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+        
+        .rule-item {
+            background-color: rgba(51, 51, 51, 0.3);
+            padding: 15px;
+            border-left: 4px solid var(--primary-red);
+            margin-bottom: 15px;
+            border-radius: 0 5px 5px 0;
+            transition: transform 0.2s ease;
+        }
+        
+        .rule-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .rule-title {
+            font-weight: bold;
+            color: var(--secondary-red);
+            margin-bottom: 5px;
+        }
+        
+        .rule-description {
+            color: #ccc;
+        }
+        
+        .classification-banner {
+            text-align: center;
+            background-color: var(--primary-red);
+            padding: 8px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            border: 1px solid #ff0000;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 1px solid var(--border-color);
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab-button {
+                width: 80%;
+                margin-bottom: 5px;
+                border-radius: 5px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        .severity-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .severity-high {
+            background-color: var(--primary-red);
+        }
+        
+        .severity-medium {
+            background-color: orange;
+        }
+        
+        .severity-low {
+            background-color: yellow;
+        }
+        
+        .note {
+            background-color: rgba(153, 153, 0, 0.2);
+            border-left: 4px solid gold;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">SCP</div>
+            <h1>Foundation Milsim</h1>
+            <p class="subtitle">Rules & Regulations</p>
+        </header>
+        
+        <div class="classification-banner">
+            CLASSIFIED LEVEL 3 // FOR INTERNAL USE ONLY
+        </div>
+        
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab('discord')">Discord Rules</button>
+            <button class="tab-button" onclick="openTab('game')">Game Rules</button>
+            <button class="tab-button" onclick="openTab('conduct')">Code of Conduct</button>
+        </div>
+        
+        <div id="discord" class="tab-content active">
+            <h2>Discord Server Regulations</h2>
+            <p>All personnel must adhere to the following regulations while using Foundation communication channels.</p>
+            
+            <div class="rule-item">
+                <div class="rule-title"><span class="severity-indicator severity-high"></span>No Spamming</div>
+                <div class="rule-description">Do not flood channels with repetitive messages, excessive emojis, or disruptive content.</div>
+            </div>
+            
+            <div class="rule-item">
+                <div class="rule-title"><span class="severity-indicator severity-high"></span>No Harassment</div>
+                <div class="rule-description">Respect all personnel. Bullying, targeted attacks, or malicious behavior will not be tolerated.</div>
+            </div>
+            
+            <div class="rule-item">
+                <div class="rule-title"><span class="severity-indicator severity-high"></span>Content Restrictions</div>
+                <div class="rule-description">No NSFW, NSFL, Gore, Animal Cruelty, Sexual, Sexually Suggestive, illegal, or shock content.</div>
+            </div>
+            
+            <div class="rule-item">
+                <div class="rule-title"><span class="severity-indicator severity-high"></span>No DoX Attacks</div>
+                <div class="rule-description">Sharing personal information without consent is strictly prohibited.</div>
+            </div>
+            
+            <div class="rule-item">
+                <div class="rule-title"><span class="severity-indicator severity-high"></span>Network Security</div>
+                <div class="rule-description">No threats of DDoS, DoS, unauthorized stress testing, or attempts to damage networks or machines.</div>
+            </div>
+            
+            <div class="rule-item">
+                <div class="rule-title"><span class="severity-indicator severity-high"></span>Age Requirement</div>
+                <div class="rule-description">No underage users (13+ as per Discord Terms of Service).</div>
+            </div>
+            
+            <div class="rule-item">
+                <div class="rule-title"><span class="severity-indicator severity-medium"></span>No Trolling</div>
+                <div class="rule-description">Disruptive behavior intended to provoke or upset personnel is prohibited.</div>
+            </div>
+            
+            <div class="rule-item">
+                <div class="rule-title"><span class="severity-indicator severity-high"></span>Information Security</div>
+                <div class="rule-description">No posting sensitive, classified, restricted, or other safeguarded material.</div>
+            </div>
+            
+            <div class="rule-item">
+                <div class="rule-title"><span class="severity-indicator severity-high"></span>Inclusivity Policy</div>
+                <div class="rule-description">No racism, discrimination, transphobia, homophobia, furryphobia, xenophobia, or extremist views.</div>
+            </div>
+            
+            <div class="rule-item">
+                <div class="rule-title"><span class="severity-indicator severity-medium"></span>No Excessive Drama</div>
+                <div class="rule-description">Keep personal disputes out of public channels. Resolve issues privately or with moderators.</div>
+            </div>
+            
+            <div class="rule-item">
+                <div class="rule-title"><span class="severity-indicator severity-medium"></span>Advertising Policy</div>
+                <div class="rule-description">No advertising. The only allowed method is through the Site Affiliation Program.</div>
+            </div>
+            
+            <div class="rule-item">
+                <div class="rule-title"><span class="severity-indicator severity-high"></span>No Real-World Violence</div>
+                <div class="rule-description">No inciting or threatening real-world violence.</div>
+            </div>
+            
+            <div class="rule-item">
+                <div class="rule-title"><span class="severity-indicator severity-medium"></span>Departure Protocol</div>
+                <div class="rule-description">If trained and wishing to leave, message The Administrator with your reason. If unavailable, contact The Vice Administrator, then Site Director, then your immediate supervisor.</div>
+            </div>
+            
+            <div class="rule-item">
+                <div class="rule-title"><span class="severity-indicator severity-low"></span>Language Requirement</div>
+                <div class="rule-description">Use US-English only, as the server is primarily English-speaking.</div>
+            </div>
+            
+            <div class="rule-item">
+                <div class="rule-title"><span class="severity-indicator severity-high"></span>Discord Compliance</div>
+                <div class="rule-description">Follow Discord Terms of Service and Community Guidelines at all times.</div>
+            </div>
+        </div>
+        
+        <div id="game" class="tab-content">
+            <h2>Game Regulations</h2>
+            <p>All personnel must adhere to the following regulations while participating in Foundation operations.</p>
+            
+            <div class="rule-item">
+                <div class="rule-title"><span class="severity-indicator severity-high"></span>No Exploiting</div>
+                <div class="rule-description">Do not use game exploits, glitches, or unintended mechanics for advantage.</div>
+            </div>
+            
+            <div class="rule-item">
+                <div class="rule-title"><span class="severity-indicator severity-high"></span>No Hacking</div>
+                <div class="rule-description">No hacking, inserting local scripts, code, UIs/GUIs, or any unauthorized modifications.</div>
+            </div>
+            
+            <div class="rule-item">
+                <div class="rule-title"><span class="severity-indicator severity-medium"></span>No Trolling</div>
+                <div class="rule-description">Do not intentionally disrupt gameplay or harass other players.</div>
+            </div>
+            
+            <div class="rule-item">
+                <div class="rule-title"><span class="severity-indicator severity-high"></span>No DoX Attacks</div>
+                <div class="rule-description">Sharing personal information without consent is strictly prohibited.</div>
+            </div>
+            
+            <div class="rule-item">
+                <div class="rule-title"><span class="severity-indicator severity-high"></span>Network Security</div>
+                <div class="rule-description">No threats of DDoS, DoS, unauthorized network stress testing, or attempts to damage networks.</div>
+            </div>
+            
+            <div class="rule-item">
+                <div class="rule-title"><span class="severity-indicator severity-high"></span>Unauthorized Access</div>
+                <div class="rule-description">No attempting to gain unauthorized access to secure systems, internal APIs, or user information.</div>
+            </div>
+            
+            <div class="note">
+                <strong>Note:</strong> Violations of game regulations may result in immediate termination from the milsim and permanent banning from all Foundation services.
+            </div>
+        </div>
+        
+        <div id="conduct" class="tab-content">
+            <h2>Code of Conduct</h2>
+            <p>All Foundation personnel are expected to maintain the highest standards of professionalism and ethics.</p>
+            
+            <h3>Professional Behavior</h3>
+            <ul class="rules-list">
+                <li>Treat all personnel with respect regardless of rank, role, or background</li>
+                <li>Maintain decorum during operations and training exercises</li>
+                <li>Follow chain of command protocols at all times</li>
+                <li>Report violations of this code through appropriate channels</li>
+            </ul>
+            
+            <h3>Roleplay Expectations</h3>
+            <ul class="rules-list">
+                <li>Stay in character during operations unless otherwise specified</li>
+                <li>Follow established Foundation lore and canon</li>
+                <li>Respect the roleplay decisions of commanding officers</li>
+                <li>Maintain immersion for yourself and others</li>
+            </ul>
+            
+            <h3>Consequences for Violations</h3>
+            <ul class="rules-list">
+                <li>Minor infractions: Verbal warning and documentation</li>
+                <li>Moderate infractions: Temporary suspension from operations</li>
+                <li>Major infractions: Demotion or permanent termination from milsim</li>
+                <li>Extreme violations: Permanent ban from all Foundation services</li>
+            </ul>
+            
+            <div class="note">
+                <strong>Remember:</strong> The SCP Foundation milsim is intended to be an enjoyable experience for all personnel. Your cooperation in maintaining a professional environment is essential to our continued operation.
+            </div>
+        </div>
+        
+        <footer>
+            <p>SCP Foundation Milsim © 2023. All rights reserved.</p>
+            <p>This document is classified Level 3/XXXX. Unauthorized access is prohibited.</p>
+            <p>Secure. Contain. Protect.</p>
+        </footer>
+    </div>
+
+    <script>
+        function openTab(tabName) {
+            // Hide all tab contents
+            var tabContents = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+            
+            // Remove active class from all tab buttons
+            var tabButtons = document.getElementsByClassName("tab-button");
+            for (var i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+            
+            // Show the selected tab content and mark button as active
+            document.getElementById(tabName).classList.add("active");
+            event.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>
